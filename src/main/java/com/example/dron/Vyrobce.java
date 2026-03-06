@@ -58,11 +58,7 @@ public class Vyrobce extends Thread {
                 case "DESKA":
                     if (sklad.getDeska() > 30) {
                         Log.println("[MANAGER] pozastavil výrobu: DESKA");
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                        sleep1s();
                         continue;
                     }
                     break;
@@ -90,6 +86,7 @@ public class Vyrobce extends Thread {
                     if (sklad.getHotoveKity() >= maxvyrobeno) {
                         System.out.println("[System] Stop");
                         stopRunning();
+                        sleep1s();
                     }
                     uspech = sklad.vyrobDesku();
                     break;
@@ -113,11 +110,9 @@ public class Vyrobce extends Thread {
 
             sleep1s();
         }
-        if (Objects.equals(getName(), "Skladnik")) {
-        }
-        else {
-            System.out.println("["+getName()+"] Vytvořil "+getVyrobeno()+" "+typ);
-
+        sleep1s();
+        if (!Objects.equals(getName(), "Skladnik")) {
+           Log.println("["+getName()+"] Vytvořil "+getVyrobeno()+" "+typ);
         }
     }
 
