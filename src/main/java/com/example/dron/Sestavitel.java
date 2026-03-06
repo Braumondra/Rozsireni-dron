@@ -47,7 +47,7 @@ public class Sestavitel extends Thread {
 
             sleep1s();
         }
-        System.out.println("[Tvůrce "+getName()+"] Vytvořil "+vyrobeno+" dronů");
+        System.out.println("["+getName()+"] Vytvořil "+vyrobeno+" dronů");
     }
 
     public int getVyrobeno() {

@@ -92,7 +92,7 @@ public class Sklad {
         setCipy((int) (getCipy()+pridejcip));
         setPlast((int) (getPlast()+pridejplast));
         setHlinik((int) (getHlinik()+pridejhlinik));
-        System.out.println("[Skladnik] doplnil: Hliník+"+pridejhlinik+"g, Plast+"+pridejplast+" Čipy+"+pridejcip+"ks");
+        System.out.println("[SKLADNIk] doplnil: Hliník+"+pridejhlinik+"g, Plast+"+pridejplast+" Čipy+"+pridejcip+"ks");
         setCipy(getCipy());
         return true;
     }
