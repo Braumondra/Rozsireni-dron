@@ -22,7 +22,7 @@
          <Label text="Kolik chcete vyrobit" BorderPane.alignment="CENTER" />
       </top>
       <center>
-         <TextField BorderPane.alignment="CENTER" fx:id="Id_spinner" />
+         <TextField fx:id="Id_spinner" BorderPane.alignment="CENTER" />
       </center>
    </BorderPane>
 
