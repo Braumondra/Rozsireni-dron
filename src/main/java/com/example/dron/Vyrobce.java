@@ -1,20 +1,28 @@
 package com.example.dron;
 
+import java.util.Objects;
+
 public class Vyrobce extends Thread {
 
     private final Sklad sklad;
     private final String typ;
     private volatile boolean running = true;
     private int vyrobeno = 0;
+    private int maxvyrobeno = 0;
 
-    public Vyrobce(Sklad sklad, String typ) {
+    public Vyrobce(Sklad sklad, String typ, int maxvyrobeno) {
         super("VYROBCE-" + typ);
         this.sklad = sklad;
         this.typ = typ;
+        this.maxvyrobeno = maxvyrobeno;
     }
 
     public void stopRunning() {
         running = false;
+    }
+
+    public int getVyrobeno() {
+        return vyrobeno;
     }
 
     @Override
@@ -50,7 +58,11 @@ public class Vyrobce extends Thread {
                 case "DESKA":
                     if (sklad.getDeska() > 30) {
                         Log.println("[MANAGER] pozastavil výrobu: DESKA");
-                        sleep1s();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         continue;
                     }
                     break;
@@ -59,14 +71,34 @@ public class Vyrobce extends Thread {
             boolean uspech = false;
 
             switch (typ) {
+
                 case "RAM":
+                    if (sklad.getHotoveKity() >= maxvyrobeno) {
+                        System.out.println("[System] Stop");
+                        stopRunning();
+                    }
                     uspech = sklad.vyrobRam();
                     break;
                 case "VRTULE":
+                    if (sklad.getHotoveKity() >= maxvyrobeno) {
+                        System.out.println("[System] Stop");
+                        stopRunning();
+                    }
                     uspech = sklad.vyrobVrtule();
                     break;
                 case "DESKA":
+                    if (sklad.getHotoveKity() >= maxvyrobeno) {
+                        System.out.println("[System] Stop");
+                        stopRunning();
+                    }
                     uspech = sklad.vyrobDesku();
+                    break;
+                case "Skladnik":
+                    if (sklad.getHotoveKity() >= maxvyrobeno) {
+                        System.out.println("[System] Stop");
+                        stopRunning();
+                    }
+                    uspech= sklad.Skladnik();
                     break;
             }
 
@@ -80,6 +112,12 @@ public class Vyrobce extends Thread {
             }
 
             sleep1s();
+        }
+        if (Objects.equals(getName(), "Skladnik")) {
+        }
+        else {
+            System.out.println("["+getName()+"] Vytvořil "+getVyrobeno()+" "+typ);
+
         }
     }
 

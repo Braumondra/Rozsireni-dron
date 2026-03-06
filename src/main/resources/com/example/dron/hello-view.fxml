@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dron.HelloController">
+<VBox alignment="CENTER" prefHeight="534.0" prefWidth="288.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dron.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         
     </padding>
-       <Label text="MATERIÁL"/>
+       <Label text="MATERIÁL" />
 
-        <Label fx:id="lblHlinik" text="Hliník: 10000"/>
-        <Label fx:id="lblPlast" text="Plast: 10000"/>
-        <Label fx:id="lblCipy" text="Čipy: 1000"/>
+        <Label fx:id="lblHlinik" text="Hliník: 10000" />
+        <Label fx:id="lblPlast" text="Plast: 10000" />
+        <Label fx:id="lblCipy" text="Čipy: 1000" />
+   <BorderPane prefHeight="27.0" prefWidth="248.0">
+      <top>
+         <Label text="Kolik chcete vyrobit" BorderPane.alignment="CENTER" />
+      </top>
+      <center>
+         <TextField BorderPane.alignment="CENTER" fx:id="Id_spinner" />
+      </center>
+   </BorderPane>
 
-        <Label text="KOMPONENTY"/>
-        <Label fx:id="lblRam" text="Rám: 0"/>
-        <Label fx:id="lblVrtule" text="Vrtule: 0"/>
-        <Label fx:id="lblDeska" text="Deska: 0"/>
+        <Label text="KOMPONENTY" />
+        <Label fx:id="lblRam" text="Rám: 0" />
+        <Label fx:id="lblVrtule" text="Vrtule: 0" />
+        <Label fx:id="lblDeska" text="Deska: 0" />
 
-        <Label text="HOTOVÉ KITY"/>
-        <Label fx:id="lblKity" text="0" style="-fx-font-size: 24px; -fx-text-fill: red;"/>
+        <Label text="HOTOVÉ KITY" />
+        <Label fx:id="lblKity" style="-fx-font-size: 24px; -fx-text-fill: red;" text="0" />
 
-        <Button text="Start" onAction="#start"/>
-        <Button text="Stop" onAction="#stop"/>
-    <Button fx:id="btnPause" text="Pause" onAction="#pauseResume"/>
+        <Button onAction="#start" text="Start" />
+        <Button onAction="#stop" text="Stop" />
+    <Button fx:id="btnPause" onAction="#pauseResume" text="Pause" />
 
 </VBox>

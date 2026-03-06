@@ -4,10 +4,13 @@ public class Sestavitel extends Thread {
 
     private final Sklad sklad;
     private volatile boolean running = true;
+    private int maximum;
+    private int vyrobeno=0;
 
-    public Sestavitel(Sklad sklad, int id) {
+    public Sestavitel(Sklad sklad, int id,int maximum) {
         super("SESTAVITEL-" + id);
         this.sklad = sklad;
+        this.maximum = maximum;
     }
 
     public void stopRunning() {
@@ -16,7 +19,6 @@ public class Sestavitel extends Thread {
 
     @Override
     public void run() {
-
         while (running) {
             if (sklad.isPaused()) {
                 try {
@@ -26,9 +28,14 @@ public class Sestavitel extends Thread {
                 }
                 continue;
             }
+            if (sklad.getHotoveKity()>=maximum){
+                stopRunning();
+                System.out.println("[System] Stop");
+            }
             boolean uspech = sklad.sestavKit();
 
             if (uspech) {
+                vyrobeno++;
                 int cislo = sklad.getHotoveKity();
                 Log.println("[" + getName()
                         + "] sestavil KIT # " + cislo);
@@ -37,8 +44,14 @@ public class Sestavitel extends Thread {
                         + "] čeká na komponenty");
             }
 
+
             sleep1s();
         }
+        System.out.println("[Tvůrce "+getName()+"] Vytvořil "+getVyrobeno()+" dronů");
+    }
+
+    public int getVyrobeno() {
+        return vyrobeno;
     }
 
     private void sleep1s() {
